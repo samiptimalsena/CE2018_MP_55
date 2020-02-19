@@ -34,9 +34,23 @@ int stack::pop(){
 
 
 void postFixEval(char postFix[],int size){
+    int n=0;
+    int dCount=0;
+    int oCount=0;
+    char ch;
+    for(n=0;n<size-1;n++){
+        ch=postFix[n];
+        if(isdigit(ch)){
+            dCount+=1;
+        }
+         if(ch == '+' || ch == '-' || ch == '*' || ch == '/' ){
+             oCount+=1;
+         }
+        
+    }
+    if((dCount-oCount)==1){
     int i,A,B;
     int val=0;
-    char ch;
     stack s;
     for(int i=0;i<size-1;i++){
         ch=postFix[i];
@@ -66,6 +80,10 @@ void postFixEval(char postFix[],int size){
         }
     }
     cout<<"The required value of postFix is"<<s.pop();
+    }
+    else{
+        cout<<"Wrong postfix expression"<<endl;
+    }
 }
 
 int main(){
@@ -73,6 +91,7 @@ int main(){
     char postFix[POSTFIX_SIZE];
     cout<<"Enter posfix Expression"<<endl;
     cout<<"press d or D when done"<<endl;
+    cout<<"input should be less than 10"<<endl;
     for(i=0;i<POSTFIX_SIZE;i++){
      cin>>postFix[i];
      size++;
